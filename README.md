@@ -63,6 +63,8 @@ This guide demonstrates how to integrate Usermaven analytics with Google Tag Man
    ```
    - Replace 'YOUR-KEY-HERE' with your Usermaven tracking key
 
+   ![Usermaven Pixel Tag Configuration](static/usermaven-pixel-tag.png)
+
 2. Set trigger to: All Pages
 
 3. Create a Data Layer Variable:
@@ -70,6 +72,8 @@ This guide demonstrates how to integrate Usermaven analytics with Google Tag Man
    - Variable Type: Data Layer Variable
    - Data Layer Variable Name: "usermaven_event"
    - Leave other settings as default
+
+   ![Data Layer Variable Configuration](static/data-layer-variable.png)
 
 ## Step 3: Setting Up User Identification
 
@@ -97,10 +101,14 @@ The user identify event is crucial for tracking user behavior across sessions. Y
    </script>
    ```
 
+   ![User Identify Tag Configuration](static/user-identify-tag.png)
+
 2. Create a trigger:
    - Name: "User Identify Event"
    - Type: Custom Event
    - Event name: user_identify
+
+   ![User Identify Trigger Configuration](static/user-identify-trigger.png)
 
 ### 3.2 Implementation in Your Code
 
