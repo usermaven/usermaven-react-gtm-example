@@ -25,8 +25,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       window.dataLayer?.push({
         event: 'user_identify',
         usermaven_event: {
-          name: 'user_identify',
-          user_name: user.name,
+          first_name: user.name,
           id: user.id?.toString(),
           email: user.email,
           created_at: user.created_at,
@@ -56,8 +55,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         window.dataLayer?.push({
           event: 'user_identify',
           usermaven_event: {
-            name: 'user_identify',
-            user_name: user.name,
+            first_name: user.name,
             id: user.id?.toString(),
             email: user.email,
             created_at: user.created_at,
@@ -83,8 +81,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       window.dataLayer?.push({
         event: 'signed_up',
         usermaven_event: {
-          name: 'signed_up',
-          user_name: newUser.name,
+          first_name: newUser.name,
           id: newUser.id?.toString(),
           email: newUser.email,
           created_at: newUser.created_at,
@@ -98,8 +95,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       window.dataLayer?.push({
         event: 'user_identify',
         usermaven_event: {
-          name: 'user_identify',
-          user_name: newUser.name,
+          first_name: newUser.name,
           id: newUser.id?.toString(),
           email: newUser.email,
           created_at: newUser.created_at,

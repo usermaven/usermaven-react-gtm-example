@@ -89,7 +89,7 @@ The user identify event is crucial for tracking user behavior across sessions. Y
      var eventData = {{dlv - usermaven_event}};
      usermaven("id", {
        id: eventData.id,
-       user_name: eventData.user_name,
+       first_name: eventData.first_name,
        email: eventData.email,
        created_at: eventData.created_at,
        custom: eventData.custom || {}
@@ -122,8 +122,7 @@ export const UserProvider = ({ children }) => {
       window.dataLayer?.push({
         event: 'user_identify',
         usermaven_event: {
-          name: 'user_identify',
-          user_name: user.name,
+          first_name: user.first_name,
           id: user.id?.toString(),
           email: user.email,
           created_at: user.created_at,
@@ -153,8 +152,7 @@ export const UserProvider = ({ children }) => {
         window.dataLayer?.push({
           event: 'user_identify',
           usermaven_event: {
-            name: 'user_identify',
-            user_name: user.name,
+            first_name: user.first_name,
             id: user.id?.toString(),
             email: user.email,
             created_at: user.created_at,
@@ -181,7 +179,6 @@ export const UserProvider = ({ children }) => {
       window.dataLayer?.push({
         event: 'signed_up',
         usermaven_event: {
-          name: 'signed_up',
           user_name: newUser.name,
           id: newUser.id?.toString(),
           email: newUser.email,
@@ -196,8 +193,7 @@ export const UserProvider = ({ children }) => {
       window.dataLayer?.push({
         event: 'user_identify',
         usermaven_event: {
-          name: 'user_identify',
-          user_name: newUser.name,
+          first_name: newUser.first_name,
           id: newUser.id?.toString(),
           email: newUser.email,
           created_at: newUser.created_at,
@@ -223,12 +219,7 @@ export const UserProvider = ({ children }) => {
 
 ### 3.3 Key Points for User Identification
 
-1. **Persistent Login State**
-   - Store user data in localStorage after login/signup
-   - Retrieve user data on page load
-   - Clear localStorage on logout
-
-2. **When to Trigger Identify Event**
+1. **When to Trigger Identify Event**
    ```typescript
    // 1. After successful login
    const onLogin = async (email, password) => {
@@ -255,7 +246,6 @@ export const UserProvider = ({ children }) => {
        window.dataLayer?.push({
          event: 'user_identify',
          usermaven_event: {
-           name: 'user_identify',
            user_name: user.name,
            id: user.id?.toString(),
            email: user.email,
@@ -269,9 +259,9 @@ export const UserProvider = ({ children }) => {
    }, []);
    ```
 
-3. **Required User Properties**
+2. **Required User Properties**
    - `id`: Unique identifier for the user
-   - `user_name`: User's display name
+   - `first_name`: User's display name (Optional)
    - `email`: User's email address
    - `created_at`: Timestamp when user account was created
    - `custom`: Object for additional custom properties
@@ -281,7 +271,6 @@ export const UserProvider = ({ children }) => {
    - Include consistent user properties across all identify events
    - Handle failed login/signup attempts appropriately
    - Ensure user data is cleared on logout
-   - Use proper error handling for localStorage operations
 
 ### 3.4 Testing User Identification
 
@@ -316,7 +305,7 @@ export const UserProvider = ({ children }) => {
    ```html
    <script>
      var eventData = {{dlv - usermaven_event}};
-     usermaven("track", {
+     usermaven("track", 'add_to_cart', {
        value: eventData.value,
        currency: eventData.currency,
        items: eventData.items || []
@@ -334,7 +323,6 @@ export const UserProvider = ({ children }) => {
    window.dataLayer?.push({
      event: 'add_to_cart',
      usermaven_event: {
-       name: 'add_to_cart',
        value: item.price,
        currency: 'USD',
        items: [{

@@ -33,7 +33,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         window.dataLayer?.push({
           event: 'add_to_cart',
           usermaven_event: {
-            name: 'add_to_cart',
             value: item.price,
             currency: 'USD',
             items: [{
@@ -52,7 +51,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       window.dataLayer?.push({
         event: 'add_to_cart',
         usermaven_event: {
-          name: 'add_to_cart',
           value: item.price,
           currency: 'USD',
           items: [{
