@@ -24,7 +24,7 @@ First, add the Usermaven Pixel tag in GTM:
         t.defer = true;
         t.id = 'um-tracker';
         t.setAttribute('data-tracking-host', "https://events.usermaven.com")
-        t.setAttribute('data-key', 'UMxQbDN6d5');
+        t.setAttribute('data-key', 'UMXXXXXX');
         t.setAttribute('data-autocapture', 'true');  
         t.src = 'https://t.usermaven.com/lib.js';
         s.parentNode.insertBefore(t, s);
@@ -40,7 +40,7 @@ Trigger: All Pages
 ```html
 <script>
   var eventData = {{dlv - usermaven_event}};
-  usermaven("id", eventData.id, {
+  usermaven("id", {
     id: eventData.id,
     user_name: eventData.user_name,
     email: eventData.email,
@@ -73,7 +73,7 @@ window.dataLayer?.push({
 ```html
 <script>
   var eventData = {{dlv - usermaven_event}};
-  usermaven("track", eventData.name, {
+  usermaven("track", {
     value: eventData.value,
     currency: eventData.currency,
     items: eventData.items || []
