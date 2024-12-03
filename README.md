@@ -179,7 +179,7 @@ export const UserProvider = ({ children }) => {
       window.dataLayer?.push({
         event: 'signed_up',
         usermaven_event: {
-          user_name: newUser.name,
+          first_name: newUser.first_name,
           id: newUser.id?.toString(),
           email: newUser.email,
           created_at: newUser.created_at,
@@ -246,7 +246,7 @@ export const UserProvider = ({ children }) => {
        window.dataLayer?.push({
          event: 'user_identify',
          usermaven_event: {
-           user_name: user.name,
+           first_name: user.first_name,
            id: user.id?.toString(),
            email: user.email,
            created_at: user.created_at,
@@ -264,7 +264,7 @@ export const UserProvider = ({ children }) => {
    - `first_name`: User's display name (Optional)
    - `email`: User's email address
    - `created_at`: Timestamp when user account was created
-   - `custom`: Object for additional custom properties
+   - `custom`: Object for additional custom properties (Optional)
 
 4. **Best Practices**
    - Always trigger identify event before tracking user actions
@@ -379,11 +379,11 @@ Common issues and solutions:
 
 ## Example Implementation
 
-Check out our [demo repository](https://github.com/yourusername/gtm-demo) for a complete working example using React and TypeScript.
+Check out our [demo repository](https://github.com/usermaven/usermaven-react-gtm-example) for a complete working example using React and TypeScript.
 
 ## Support
 
 For additional help:
-- [Usermaven Documentation](https://docs.usermaven.com/)
+- [Usermaven Documentation](https://usermaven.com/docs)
 - [GTM Documentation](https://support.google.com/tagmanager)
-- [Create an issue](https://github.com/yourusername/gtm-demo/issues)
+- [Create an issue](https://github.com/usermaven/usermaven-react-gtm-example/issues)
