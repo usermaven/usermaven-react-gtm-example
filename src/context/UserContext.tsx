@@ -11,12 +11,41 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem('currentUser');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   useEffect(() => {
     // Initialize IndexedDB
     dbService.init();
+    
+    // If we have a saved user, trigger the identify event
+    if (user) {
+      window.dataLayer?.push({
+        event: 'user_identify',
+        usermaven_event: {
+          name: 'user_identify',
+          user_name: user.name,
+          id: user.id?.toString(),
+          email: user.email,
+          created_at: user.created_at,
+          custom: {
+            plan: 'free',
+          }
+        }
+      });
+    }
   }, []);
+
+  // Update localStorage whenever user state changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+  }, [user]);
 
   const login = async (email: string, password: string) => {
     try {
@@ -28,7 +57,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
           event: 'user_identify',
           usermaven_event: {
             name: 'user_identify',
-
             user_name: user.name,
             id: user.id?.toString(),
             email: user.email,
@@ -56,7 +84,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         event: 'signed_up',
         usermaven_event: {
           name: 'signed_up',
-
           user_name: newUser.name,
           id: newUser.id?.toString(),
           email: newUser.email,
@@ -72,7 +99,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         event: 'user_identify',
         usermaven_event: {
           name: 'user_identify',
-
           user_name: newUser.name,
           id: newUser.id?.toString(),
           email: newUser.email,
